@@ -21,7 +21,6 @@ class Plan extends Model
         'price',
         'priceDesc',
         'clicks',
-        'user_id',
     ];
 
     protected $hidden = [

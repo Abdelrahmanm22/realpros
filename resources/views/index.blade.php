@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="real pros, real pros call center, real estate, call center,real estates" />
+    <meta name="robots" content="index,follow" />
     {{-- <meta name="author" content="Author name" />
     <meta name="copyright" content="Copyright owner" /> --}}
-    <meta name="robots" content="index,follow" />
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title>Real Pros Call Center</title>
 </head>

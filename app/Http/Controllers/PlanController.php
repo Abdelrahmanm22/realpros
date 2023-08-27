@@ -112,7 +112,6 @@ class PlanController extends Controller
             'price'=>$request->price,
             'discount'=>$request->discount,
             'priceDesc'=>$request->period,
-            'user_id'=>Auth::user()->id,
         ]);
         // dd($plan);
         return redirect('/home')->with(['success'=>'Updated Successfully']);
