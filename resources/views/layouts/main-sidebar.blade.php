@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="{{route('home')}}" class="brand-link">
+      <a href="{{ route('home') }}" class="brand-link">
           <img src="{{ URL::asset('back/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
               class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">REAL PROS</span>
@@ -16,7 +16,7 @@
                       alt="User Image">
               </div>
               <div class="info">
-                  <a href="{{route('home')}}" class="d-block">{{ Auth::user()->name }}</a>
+                  <a href="{{ route('home') }}" class="d-block">{{ Auth::user()->name }}</a>
               </div>
           </div>
 
@@ -59,11 +59,11 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                            <a href="{{ route('pricing') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pricing Contact</p>
-                            </a>
-                        </li>
+                              <a href="{{ route('pricing') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Pricing Contact</p>
+                              </a>
+                          </li>
                           <li class="nav-item">
                               <a href="{{ route('popup') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
@@ -105,7 +105,13 @@
 
                   <li class="nav-header">SETTINGS</li>
                   <li class="nav-item">
-                      <a href="{{route('addAdmin')}}" class="nav-link">
+                      <a href="{{ route('updatePass') }}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Password</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('addAdmin') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Add Admin</p>
                       </a>

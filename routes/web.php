@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PopupController;
@@ -20,44 +21,48 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('progress');
+    return view('index');
 });
-// Route::get('/pricing-plans', function () {
-//     return view('index');
-// });
+Route::get('/pricing-plans', function () {
+    return view('index');
+});
 
 
-// // Auth::routes(['register' => false]);
+// Auth::routes(['register' => false]);
 // Auth::routes();
-// Route::group(['prefix' => 'balo'], function () {
-//     Route::get('/nigol', function () {
-//         return view('auth.login');
-//     });
+Auth::routes(['login' => false, 'register' => false]);
+Route::group(['prefix' => 'balo'], function () {
+    // Route::get('/nigol', function () {
+    //     return view('auth.login');
+    // });
+    // Route::get('nigol', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::get('nigol',[LoginController::class,'showLoginForm']);
+    Route::post('signin', [LoginController::class,'login'])->name('login');
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/addAdmin', [App\Http\Controllers\HomeController::class, 'addAdmin'])->name('addAdmin');
+    Route::post('/postAdmin', [App\Http\Controllers\HomeController::class, 'postAdmin'])->name('postAdmin');
+    Route::get('/updatePass', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePass');
+    Route::post('/postPass', [App\Http\Controllers\HomeController::class, 'postPass'])->name('postPass');
 
 
-//     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//     Route::get('/addAdmin', [App\Http\Controllers\HomeController::class, 'addAdmin'])->name('addAdmin');
-//     Route::post('/postAdmin', [App\Http\Controllers\HomeController::class, 'postAdmin'])->name('postAdmin');
+    //==============================Routes For Plan=====================
+    Route::get('/editPlan/{id}', [PlanController::class, 'edit'])->name('Edit.Plan');
+    Route::post('/update/{id}', [PlanController::class, 'update'])->name('update.Plan');
+    //==============================Routes For Plan=====================
 
 
-
-//     //==============================Routes For Plan=====================
-//     Route::get('/editPlan/{id}', [PlanController::class, 'edit'])->name('Edit.Plan');
-//     Route::post('/update/{id}', [PlanController::class, 'update'])->name('update.Plan');
-//     //==============================Routes For Plan=====================
+    //==============================Routes For Contact=====================
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    //==============================Routes For Contact=====================
 
 
-//     //==============================Routes For Contact=====================
-//     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-//     //==============================Routes For Contact=====================
+    //==============================Routes For PopUp Contact=====================
+    Route::get('/popup', [PopupController::class, 'index'])->name('popup');
+    //==============================Routes For PopUp Contact=====================
 
+    //==============================Routes For PopUp Contact=====================
+    Route::get('/pricingContact', [PricingContactController::class, 'index'])->name('pricing');
+    //==============================Routes For PopUp Contact=====================
 
-//     //==============================Routes For PopUp Contact=====================
-//     Route::get('/popup', [PopupController::class, 'index'])->name('popup');
-//     //==============================Routes For PopUp Contact=====================
-
-//     //==============================Routes For PopUp Contact=====================
-//     Route::get('/pricingContact', [PricingContactController::class, 'index'])->name('pricing');
-//     //==============================Routes For PopUp Contact=====================
-
-// });
+});

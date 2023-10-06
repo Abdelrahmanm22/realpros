@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 class HomeController extends Controller
 {
     /**
@@ -28,25 +30,51 @@ class HomeController extends Controller
     {
         $plans = Plan::get();
         $clicks = Plan::select('clicks')->get();
-        return view('home',compact('plans','clicks'));
+        return view('home', compact('plans', 'clicks'));
     }
+    public function updatePassword()
+    {
+        $user = Auth::user();
+        return view('updatePass', compact('user'));
+    }
+    public function postPass(Request $request)
+    {
+        ///validation
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
 
-    public function addAdmin(){
+        //check if data is not correct
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $user = Auth::user();
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+        return redirect()->back()->with(['success' => 'Updated Successfully']);
+    }
+    public function addAdmin()
+    {
         return view('addAdmin');
     }
 
-    public function postAdmin(Request $request){
+    public function postAdmin(Request $request)
+    {
 
-        
+
         ///validation
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         //check if data is not correct
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
 
@@ -56,6 +84,6 @@ class HomeController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->back()->with(['success'=>'Added successfully']);
+        return redirect()->back()->with(['success' => 'Added successfully']);
     }
 }

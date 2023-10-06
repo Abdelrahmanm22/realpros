@@ -113,8 +113,7 @@ class PlanController extends Controller
             'discount'=>$request->discount,
             'priceDesc'=>$request->period,
         ]);
-        // dd($plan);
-        return redirect('/home')->with(['success'=>'Updated Successfully']);
+        return redirect('/balo/home')->with(['success'=>'Updated Successfully']);
     }
 
     /**
